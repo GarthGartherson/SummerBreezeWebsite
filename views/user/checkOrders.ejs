@@ -1,0 +1,139 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/home.css"> 
+  <div class="my-4 bg-white p-4 rounded margin-auto col-md-10 offset-md-1 min-vh-100">
+      <h1 class="ps-1 bg-white p-3 mb-3">All Orders</h1>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="incomplete-tab" data-bs-toggle="tab" data-bs-target="#incomplete" type="button" role="tab" aria-controls="incomplete" aria-selected="true">Incomplete</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="complete-tab" data-bs-toggle="tab" data-bs-target="#complete" type="button" role="tab" aria-controls="complete" aria-selected="false">Complete</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="incomplete" role="tabpanel" aria-labelledby="incomplete-tab">
+            <% if (!orders.some(order => order.complete === false)) { %>
+                <h2 class=" position-absolute top-50 start-50 translate-middle">No orders at the moment</h2>
+            <% } %> 
+            <% for(let order of orders){ %> 
+                <% if(order.complete === false){ %>
+                    <div class="card text-center">
+                        <div class="card-header bg-muted">
+                            <div class="row">
+                              <p class="col-8 text-start">Date: <%= order.date  %></p>
+                              <% if(order.complete === false){ %>
+                              <p class="col-4 d-inline-block text-danger text-end">NOT DONE</p>
+                              <% } else {%>   
+                                  <p class="col-4 d-inline-block text-success text-end">DONE</p>
+                              <% } %> 
+                            </div>
+              
+                        </div>
+              
+                        <div class="card-body py-4">
+                            <ol class="list-group list-group-numbered">
+                                <% for(let product of order.items) { %> 
+                                <li class="list-group-item bg-white d-flex justify-content-between align-items-start">
+                                  <div class="ms-2 me-auto">
+                                    <div class="fw-bold"><%= product.item.title %> </div>
+                                    <span><%= product.item.price %> x <%= product.quantity %> </span>
+                                  </div>
+                                  <span class="badge bg-primary rounded-pill">&#3647; <%= product.item.price %></span>
+                                </li>
+                                <% } %>
+                            </ol>
+                            <li class="list-group-item bg-white d-flex justify-content-between align-items-start mb-4">
+                              <div class="ms-2 me-auto">
+                                <div class="fw-bold">Subtotal: &#3647;<%= order.cart.totalPrice %> </div>
+                              </div>
+                            </li>
+                            <ul class="list-group text-start">
+                              <li class="list-group-item"><span class="fw-bold pe-2"> Name: </span> <%= order.address.firstName %> </li>
+                              <li class="list-group-item"><span class="fw-bold pe-2"> Instagram:</span> <%= order.address.instagram  %> </li>
+                              <li class="list-group-item"><span class="fw-bold pe-2"> Number:</span> <%= order.address.phoneNumber %> </li>
+                              <li class="list-group-item"><span class="fw-bold pe-2"> Address:</span> <%= order.address.address %> </li>
+                              <li class="list-group-item"><%= order.address.subdistrict %>, <%= order.address.district %> </li>
+                              <li class="list-group-item"><%= order.address.province %>, <%= order.address.country %> </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card-footer text-start">
+                          <div class="row">
+                              <div class="col-8">
+                                  Shipping: &#3647;50 <br>
+                                  <span class="fw-bold"> Total: &#3647; <%= order.cart.totalPrice + 50 %> </span>
+                              </div>
+                              <div class="col-4 d-flex align-items-center justify-content-end">
+                                  <a href="/user/completeOrder/<%=order._id%>" type="button" class="btn btn-primary btn-primary btn-sm text-sm">Order Completed</a>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <% } %> 
+            <% } %>  
+        </div>
+        <div class="tab-pane fade" id="complete" role="tabpanel" aria-labelledby="complete-tab">
+            <% if (!orders.some(order => order.complete === true)) { %>
+                <h2 class=" position-absolute top-50 start-50 translate-middle">No orders finished.</h2>
+            <% } %> 
+            <% for(let order of orders){ %> 
+                <% if(order.complete === true){ %>
+                    <div class="card text-center">
+                        <div class="card-header bg-muted">
+                            <div class="row">
+                              <p class="col-8 text-start">Date: <%= order.date  %></p>
+                              <% if(order.complete === false){ %>
+                              <p class="col-4 d-inline-block text-danger text-end">NOT DONE</p>
+                              <% } else {%>   
+                                  <p class="col-4 d-inline-block text-success text-end">DONE</p>
+                              <% } %> 
+                            </div>
+              
+                        </div>
+              
+                        <div class="card-body py-4">
+                            <ol class="list-group list-group-numbered">
+                                <% for(let product of order.items) { %> 
+                                <li class="list-group-item bg-white d-flex justify-content-between align-items-start">
+                                  <div class="ms-2 me-auto">
+                                    <div class="fw-bold"><%= product.item.title %> </div>
+                                    <span><%= product.item.price %> x <%= product.quantity %> </span>
+                                  </div>
+                                  <span class="badge bg-primary rounded-pill">&#3647; <%= product.item.price %></span>
+                                </li>
+                                <% } %>
+                            </ol>
+                            <li class="list-group-item bg-white d-flex justify-content-between align-items-start mb-4">
+                              <div class="ms-2 me-auto">
+                                <div class="fw-bold">Subtotal: &#3647;<%= order.cart.totalPrice %> </div>
+                              </div>
+                            </li>
+                            <ul class="list-group text-start">
+                              <li class="list-group-item"><span class="fw-bold pe-2"> Name: </span> <%= order.address.firstName %> </li>
+                              <li class="list-group-item"><span class="fw-bold pe-2"> Instagram:</span> <%= order.address.instagram  %> </li>
+                              <li class="list-group-item"><span class="fw-bold pe-2"> Number:</span> <%= order.address.phoneNumber %> </li>
+                              <li class="list-group-item"><span class="fw-bold pe-2"> Address:</span> <%= order.address.address %> </li>
+                              <li class="list-group-item"><%= order.address.subdistrict %>, <%= order.address.district %> </li>
+                              <li class="list-group-item"><%= order.address.province %>, <%= order.address.country %> </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card-footer text-start">
+                          <div class="row">
+                              <div class="col-8">
+                                  Shipping: &#3647;50 <br>
+                                  <span class="fw-bold"> Total: &#3647; <%= order.cart.totalPrice + 50 %> </span>
+                              </div>
+                              <div class="col-4 d-flex align-items-center justify-content-end">
+                                  <a href="/user/completeOrder/<%=order._id%>" type="button" class="btn btn-primary btn-primary btn-sm text-sm">Order Completed</a>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <% } %> 
+            <% } %>
+        </div>
+      </div>
+  </div>

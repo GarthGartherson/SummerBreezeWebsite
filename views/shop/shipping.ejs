@@ -1,0 +1,156 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/home.css">
+
+<!-- */position-absolute top-50 start-50 translate-middle -->
+<div class="">
+    <div class="col-sm-10 col-md-8 col-lg-6 bg-white rounded p-4 m-auto mb-5">
+        <h4 class="mb-3">Shipping Address</h4>
+        <form action="/shop/shipping" 
+        method="POST" class="validated-form" novalidate>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Joe" name="firstName" required>
+                    <div class="invalid-feedback"> Valid first name is required. </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" value="" required>
+                    <div class="invalid-feedback"> Valid last name is required. </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="phoneNumber">Phone:</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="number" placeholder="" value="" required>
+                    <div class="invalid-feedback"> Please insert your phone number for delivery</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="instagram">Instagram</label>
+                    <input type="text" class="form-control" id="instagram" name="instagram" placeholder="@" value="" required>
+                    <div class="invalid-feedback"> Please type your Instagram. </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="address" required>
+                <div class="invalid-feedback"> Please enter your shipping address. </div>
+            </div>
+            <div class="mb-3">
+                <label for="subdistrict">Subdistrict</label>
+                <input type="text" class="form-control" id="subdistrict" placeholder="Sena Nikhom" name="subdistrict" required>
+                <div class="invalid-feedback"> Please enter your shipping Subdistrict. </div>
+            </div>
+            <div class="mb-3">
+                <label for="district">District</label>
+                <input type="text" class="form-control" id="district" placeholder="Chatuchak" name="district" required>
+                <div class="invalid-feedback"> Please enter your shipping District. </div>
+            </div>
+            <!-- <div class="mb-3">
+                <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+            </div> -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="province">Province</label>
+                    <select class="custom-select d-block w-100" id="province" name="province" required>
+                        <option value="">Choose...</option>
+                        <option value="Bangkok">กรุงเทพมหานคร/Bangkok</option>
+                        <option value="Krabi">กระบี่/Krabi </option>
+                        <option value="Kanchanaburi">กาญจนบุรี/Kanchanaburi </option>
+                        <option value="Kalasin">กาฬสินธุ์/Kalasin </option>
+                        <option value="Kampheng Phet">กำแพงเพชร/Kamphaeng Phet </option>
+                        <option value="Khon Khaen">ขอนแก่น/Khon Khaen </option>
+                        <option value="Chantaburi">จันทบุรี/Chantaburi</option>
+                        <option value="Chachoengsao">ฉะเชิงเทรา/Chachoengsao </option>
+                        <option value="Chai Nat">ชัยนาท/Chai Nat </option>
+                        <option value="Chaiyaphum">ชัยภูมิ/Chaiyaphum </option>
+                        <option value="Chumphon">ชุมพร/Chumphon </option>
+                        <option value="Chon Buri">ชลบุรี/Chon Buri </option>
+                        <option value="Chiang Mai">เชียงใหม่/Chiang Mai </option>
+                        <option value="Chiang Rai">เชียงราย/Chiang Rai </option>
+                        <option value="Trang">ตรัง/Trang  </option>
+                        <option value="Trat">ตราด/Trat  </option>
+                        <option value="Tak">ตาก/Tak </option>
+                        <option value="Nakhon Nayok">นครนายก/Nakhon Nayok </option>
+                        <option value="Nakhon Pathom">นครปฐม/Nakhon Pathom </option>
+                        <option value="Nakhon Phanom">นครพนม/Nakhom Phanom </option>
+                        <option value="Nakhon Ratchasima">นครราชสีมา/Nakhon Ratchasima </option>
+                        <option value="Nakhon Si Thammarat">นครศรีธรรมราช/Nakhon Si Thammarat </option>
+                        <option value="Nakhom Sawan">นครสวรรค์/Nakhon Sawan </option>
+                        <option value="Narathiwat">นราธิวาส/Narathiwat </option>
+                        <option value="Nan">น่าน/Nan </option>
+                        <option value="Nonthaburi">นนทบุรี/Nonthaburi </option>
+                        <option value="Bueng Kan">บึงกาฬ/Bueng Kan</option>
+                        <option value="Buri Ram">บุรีรัมย์/Buri Ram</option>
+                        <option value="Prachuap Khiri Khan">ประจวบคีรีขันธ์/Prachuap Khiri Khan </option>
+                        <option value="Pathum Thani">ปทุมธานี/Pathum Thani </option>
+                        <option value="Prachin Buri">ปราจีนบุรี/Prachin Buri </option>
+                        <option value="Pattani">ปัตตานี/Pattani </option>
+                        <option value="Phayao">พะเยา/Phayao </option>
+                        <option value="Ayutthaya">พระนครศรีอยุธยา/Ayutthaya </option>
+                        <option value="Phang-nga">พังงา/Phang-nga </option>
+                        <option value="Phichit">พิจิตร/Phichit </option>
+                        <option value="Phitsanulok">พิษณุโลก/Phitsanulok </option>
+                        <option value="Phetchaburi">เพชรบุรี/Phetchaburi </option>
+                        <option value="Phetchabun">เพชรบูรณ์/Phetchabun </option>
+                        <option value="Phrae">แพร่/Phrae </option>
+                        <option value="Phatthalung">พัทลุง/Phatthalung </option>
+                        <option value="Phuket">ภูเก็ต/Phuket </option>
+                        <option value="Maha Sarakham">มหาสารคาม/Maha Sarakham </option>
+                        <option value="Mukdahan">มุกดาหาร/Mukdahan </option>
+                        <option value="Mae Hong Son">แม่ฮ่องสอน/Mae Hong Son </option>
+                        <option value="Yasothon">ยโสธร/Yasothon </option>
+                        <option value="Yala">ยะลา/Yala </option>
+                        <option value="Roi Et">ร้อยเอ็ด/Roi Et </option>
+                        <option value="Ranong">ระนอง/Ranong </option>
+                        <option value="Rayong">ระยอง/Rayong </option>
+                        <option value="Ratchaburi">ราชบุรี/Ratchaburi </option>
+                        <option value="Lopburi">ลพบุรี/Lopburi </option>
+                        <option value="Lampang">ลำปาง/Lampang </option>
+                        <option value="Lamphun">ลำพูน/Lamphun  </option>
+                        <option value="Loei">เลย/Loei </option>
+                        <option value="Si Sa Ket">ศรีสะเกษ/Si Sa Ket </option>
+                        <option value="Sakon Nakhon">สกลนคร/Sakon Nakhon</option>
+                        <option value="Songkhla">สงขลา/Songkhla </option>
+                        <option value="Samut Sakhon">สมุทรสาคร/Samut Sakhon </option>
+                        <option value="Samut Prakan">สมุทรปราการ/Samut Prakan </option>
+                        <option value="Samut Songkhram">สมุทรสงคราม/Samut Songkhram </option>
+                        <option value="Sa Kaeo">สระแก้ว/Sa Kaeo </option>
+                        <option value="Pak Phriao">สระบุรี/Saraburi </option>
+                        <option value="Sing Buri">สิงห์บุรี/Sing Buri </option>
+                        <option value="Sukothai">สุโขทัย/Sukothai </option>
+                        <option value="Suphan Buri">สุพรรณบุรี/Suphan Buri </option>
+                        <option value="Surat Thani">สุราษฎร์ธานี/Surat Thani </option>
+                        <option value="Surin">สุรินทร์/Surin </option>
+                        <option value="Satun">สตูล/Satun </option>
+                        <option value="Nong Khai">หนองคาย/Nong Khai </option>
+                        <option value="Nong Bua Lam Phu">หนองบัวลำภู/Nong Bua Lam Phu </option>
+                        <option value="Amnat Charoen">อำนาจเจริญ/Amnat Charoen </option>
+                        <option value="Udon Thani">อุดรธานี/Udon Thani </option>
+                        <option value="Uttaradit">อุตรดิตถ์/Uttaradit </option>
+                        <option value="Uthai Thani">อุทัยธานี/Uthai Thani </option>
+                        <option value="Ubon Ratchathani">อุบลราชธานี/Ubon Ratchathani </option>
+                        <option value="Ang Thong">อ่างทอง/Ang Thong </option>
+                    </select>
+                    <div class="invalid-feedback"> Please provide a valid province. </div>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label for="country">Country</label>
+                    <select class="custom-select d-block w-100" id="country" name="country" required>
+                        <option>Thailand</option>
+                    </select>
+                    <div class="invalid-feedback"> Please select a valid country. </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="zip">Zip Code</label>
+                    <input type="text" class="form-control" id="zip" name="zipCode" placeholder="" required>
+                    <div class="invalid-feedback"> Zip code required. </div>
+                </div>
+            </div>
+            <hr class="mb-4">
+
+            <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit Order"></input>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/shoppingCart.css">
+
+<% if(products && products.length > 0){ %> 
+<div class="card">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4><b>Shopping Cart</b></h4>
+                    </div>
+                    <div class="col align-self-center text-right text-muted"></div>
+                </div>
+            </div>
+            <% for(let product of products){ %> 
+                <div class="row">
+                    <div class="row main align-items-center justify-content-center text-center padding-5">
+                        <div class="col-3"><img class="img-fluid" src="<%= product.item.images[0].url%> "></div>
+                        <div class="col-2 text-start">
+                            <div class="row text-muted"><%= product.item.title %></div>
+                            <div class="row"><%= product.item.price %> &#3647;</div>
+                        </div>
+                        <div class="col-5 text-end text-md-center"> 
+                            <a href="remove-from-cart/<%=product.item._id%>">-</a>
+                            <a href="#" class="border"><%= product.quantity  %></a>
+                            <a href="add-to-cart-direct/<%=product.item._id%>">+</a> 
+                        </div>
+                        <div class="col-2"><%= product.price  %> &#3647;<span class="close"></span></div>
+                    </div>
+                </div>
+                <hr>
+            <% } %> 
+
+            <div class="back-to-shop"><a href="/">&leftarrow;<span class="text-muted">Back to shop</span></a></div>
+        </div>
+        <div class="col-md-4 summary">
+            <div>
+                <h5><b>Summary</b></h5>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">Qty: <%= session.cart.totalQuantity %></div>
+                <div class="col text-right"><%= totalPrice %> &#3647;</div>
+            </div>
+            <form>
+                <p>SHIPPING</p> <select>
+                    <option class="text-muted">Standard-Delivery- &#3647;50</option>
+                </select>
+                <p>GIVE CODE</p> <input id="code" placeholder="Enter your code">
+            </form>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right"> <%= totalPrice + 50 %> &#3647;</div>
+            </div> 
+            <a href="shipping" class="btn btn-success rounded">Continue</a>
+        </div>
+    </div>
+</div>
+<% } else { %>
+    <div class="emptyCart position-absolute top-50 start-50 translate-middle bg-white p-3 rounded">
+        <h1 class="emptyCart h-90 d-flex">No Products In Your Cart</h1>
+        <a href="/" class="btn btn-primary rounded">Back to Products</a>
+    </div>
+<% } %>  

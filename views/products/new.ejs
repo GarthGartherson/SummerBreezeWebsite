@@ -1,0 +1,57 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/home.css">
+
+<div class="row my-5">
+  <div class="col-8 bg-white mx-auto px-4 py-3 rounded">
+    <h1 class="col-8 offset-2 text-center bg-white mt-3 mb-0 pt-4 strong rounded">New Product</h1>
+    <form
+      action="/products"
+      method="POST"
+      novalidate
+      class="validated-form"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-4">
+        <label class="form-label" for="title"> Title </label>
+        <input class="form-control" type="text" id="title" name="product[title]" placeholder="Product Name" required
+        />
+      </div>
+      <div class="mb-4">
+        <label class="form-label" for="image">Image Url </label>
+        <input type="file" id="image" name="image" multiple />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">Product Price</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">$</span>
+          <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="product[price]" placeholder="Product Price" required/>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="category">Select Category</label>
+        <select class="form-select" id="category" name="product[category]" required>
+          <option disabled selected">
+            Please Select A Category
+          </option>
+          <% 
+          const options = ['Bracelet', 'Anklet', 'Necklace', 'Shirt', 'Earring']
+          for(i = 0; i < options.length; i++){ %>
+            <option value='<%=options[i]%>'><%=options[i]%></option>
+            <% } %>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label" for="description">Description</label>
+        <textarea class="form-control" type="text" id="description" name="product[description]" required></textarea>
+      </div>
+
+
+
+      
+      <div class="mb-3">
+        <button class="btn btn-success">Create Product</button>
+      </div>
+    </form>
+  </div>
+</div>

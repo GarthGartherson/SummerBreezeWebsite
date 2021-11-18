@@ -1,0 +1,79 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/home.css">
+
+
+<div class="row">
+  <h1 class="col-8 offset-2 text-center bg-white mt-3 mb-0 pt-4 strong">Edit Product</h1>
+  <div class="col-8 bg-white mx-auto px-4 py-3">
+    <form
+      action="/products/<%=product._id%>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-4">
+        <label class="form-label" for="title"> Title </label>
+        <input class="form-control" type="text" id="title" name="product[title]" value="<%=product.title %>" required
+        />
+      </div>
+      <div class="mb-4">
+        <label class="form-label" for="image">Image Url </label>
+        <input type="file" id="image" name="image" multiple />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">Product Price</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">$</span>
+          <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="product[price]" value="<%=product.price%>" required/>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="category">Select Category</label>
+        <select class="form-select" id="category" name="product[category]" required>
+          <option selected value="<%=product.category%>">
+            <%=product.category%>
+          </option>
+          <% 
+          const options = ['Bracelet', 'Anklet', 'Necklace', 'Ring', 'Earring']
+          for(i = 0; i < options.length; i++){
+            if(product.category === options[i]){
+              ''
+            } else {
+              %><option value='<%=options[i]%>'><%=options[i]%></option><% 
+            }
+          }
+          %>
+        </select>
+      </div>
+      <div class="mb-3">
+        <% product.images.forEach(function(img, i) { %>
+          <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="">
+          <div class="form-check-inline">
+            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+            <label for="image-<%=i%>">Delete?</label>
+          </div>
+        <% }) %>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label" for="description">Description</label>
+        <textarea class="form-control" type="text" id="description" name="product[description]" required><%=product.description%>
+        </textarea>
+      </div>
+
+      <div class="mb-3 bg-white">
+        <label class="form-label" for="onSale">
+          On Sale (True/False)
+        </label>
+        <input class="form-control" type="text" value="<%=product.onSale%>" name="product[onSale]" id="onSale">
+      </div>
+
+
+      
+      <div class="mb-3">
+        <button class="btn btn-success">Edit Product</button>
+      </div>
+    </form>
+  </div>
+</div>

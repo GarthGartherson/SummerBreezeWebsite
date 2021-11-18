@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/home.css"> 
+  <div class="my-4 bg-white p-4 rounded m-auto col-11 col-md-10 offset-md-1 min-vh-100">
+      <h1 class="ps-1 bg-white p-3 mb-3">My Orders</h1>
+      <% for(let order of orders){ %> 
+      <div class="card text-center mb-4">
+          <div class="card-header text-start bg-muted">
+              Date: <%= order.date  %>  
+          </div>
+          <div class="card-body py-4">
+              <ol class="list-group list-group-numbered">
+                  <% for(let product of order.items) { %> 
+                  <li class="list-group-item bg-white d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                      <div class="fw-bold"><%= product.item.title %> </div>
+                      <span><%= product.item.price %> x <%= product.quantity %> </span>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">&#3647; <%= product.item.price %></span>
+                  </li>
+                  <% } %>
+              </ol>
+              <li class="list-group-item bg-white d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="">Subtotal: &#3647;<%= order.cart.totalPrice %> </div>
+                </div>
+              </li> 
+          </div>
+          
+          <div class="card-footer text-start">
+              Shipping: &#3647;50 <br>
+              <span class="fw-bold">Total: &#3647; <%= order.cart.totalPrice + 50 %></span>
+          </div>
+      </div>
+      <% } %> 
+  </div>
+    
