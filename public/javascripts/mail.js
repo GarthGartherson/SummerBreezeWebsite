@@ -39,7 +39,7 @@ const sendMail = (email, subject, arrayCart, emailObject) => {
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
-      console.log(err, null);
+      console.log("There was an error!", null);
     } else {
       console.log(`Sent`);
     }
