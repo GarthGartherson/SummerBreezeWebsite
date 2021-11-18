@@ -165,7 +165,7 @@ a:hover {
   text-decoration: none;
 }
 
-#code {
+/* #code {
   background-image: linear-gradient(
       to left,
       rgba(255, 255, 255, 0.253),
@@ -175,7 +175,7 @@ a:hover {
   background-repeat: no-repeat;
   background-position-x: 95%;
   background-position-y: center;
-}
+} */
 
 /* .container {
   height: 60vh;

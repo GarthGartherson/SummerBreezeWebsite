@@ -51,10 +51,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize());
 
 const secretKey = process.env.SECRET_KEY || "thisshouldbeasecret!";
-
 const store = new MongoStore({
   mongoUrl: dbUrl,
-  secret,
+  secret: secretKey,
   touchAfter: 24 * 60 * 60,
 });
 
@@ -162,6 +161,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
+const port = process.env.PORT || 3000;
 app.listen(3000, () => {
   console.log("Serving on port 3000");
 });
