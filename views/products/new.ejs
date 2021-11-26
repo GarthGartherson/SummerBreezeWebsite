@@ -1,8 +1,9 @@
 <% layout('layouts/boilerplate')%>
+<script defer src="/javascripts/productColors.js"></script>
 <link rel="stylesheet" href="/stylesheets/home.css">
 
 <div class="row my-5">
-  <div class="col-8 bg-white mx-auto px-4 py-3 rounded">
+  <div class="col-11 col-md-8 bg-white mx-auto px-4 py-3 rounded">
     <h1 class="col-8 offset-2 text-center bg-white mt-3 mb-0 pt-4 strong rounded">New Product</h1>
     <form
       action="/products"
@@ -23,22 +24,33 @@
       <div class="mb-3">
         <label class="form-label" for="price">Product Price</label>
         <div class="input-group">
-          <span class="input-group-text" id="price-label">$</span>
+          <span class="input-group-text" id="price-label">฿</span>
           <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="product[price]" placeholder="Product Price" required/>
         </div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="category">Select Category</label>
         <select class="form-select" id="category" name="product[category]" required>
-          <option disabled selected">
+          <option disabled selected>
             Please Select A Category
           </option>
-          <% 
-          const options = ['Bracelet', 'Anklet', 'Necklace', 'Shirt', 'Earring']
-          for(i = 0; i < options.length; i++){ %>
-            <option value='<%=options[i]%>'><%=options[i]%></option>
+          <% for(i = 0; i < optionsArray.length; i++){ %>
+            <option value='<%= optionsArray[i] %>'><%= optionsArray[i] %></option>
             <% } %>
         </select>
+      </div>
+
+      <div class="mb-3">
+        <div id="selectColorList" class="form-control fw-bold">
+          <span>Insert Colors:</span>
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Add Color
+        </button>
+
+        <!-- <button id="buttonAddColor" class="btn btn-primary my-3">Add Color</button>-->
+        <button id="buttonDeleteColor" class="btn btn-danger my-3">Delete Color</button> 
       </div>
 
       <div class="mb-4">
@@ -46,12 +58,34 @@
         <textarea class="form-control" type="text" id="description" name="product[description]" required></textarea>
       </div>
 
-
-
-      
       <div class="mb-3">
-        <button class="btn btn-success">Create Product</button>
+        <button type="submit" class="btn btn-success">Create Product</button>
       </div>
     </form>
+    
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Color:</label>
+                <input type="text" class="form-control" id="message-text"></input>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="buttonAddColor" data-bs-dismiss="modal">Finalize Color</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 </div>

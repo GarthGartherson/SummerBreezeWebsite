@@ -25,7 +25,7 @@ const seedDB = async () => {
       price: `${random30}`,
       image: `https://source.unsplash.com/1600x900/?ring,necklace`,
       author: "61017fb6cd21df5d90368c08",
-      onSale: false,
+      colors: ["Red", "Blue", "Green"],
       images: [
         {
           url: "https://res.cloudinary.com/dhfzvrfor/image/upload/v1627578028/SummerBreeze/qbl5edb38v65xaullp9p.jpg",
@@ -39,9 +39,7 @@ const seedDB = async () => {
     });
     newProduct.category = newProduct.title.split(" ")[1];
     newProduct.description = `${sample(descriptions)}`;
-    (newProduct.salePrice = newProduct.price * 0.75),
-      //prettier-ignore
-      await newProduct.save();
+    await newProduct.save();
   }
 };
 

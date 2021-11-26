@@ -23,7 +23,8 @@ const shopRoutes = require("./routes/shop");
 
 const MongoStore = require("connect-mongo");
 
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/summer-breeze";
+// const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/summer-breeze";
+const dbUrl = "mongodb://localhost:27017/summer-breeze";
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -161,7 +162,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-const port = process.env.PORT || 3000;
+const port = 3000 || process.env.PORT;
 app.listen(port, () => {
   console.log("Serving on port 3000");
 });

@@ -23,6 +23,9 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  colors: {
+    type: Array,
+  },
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

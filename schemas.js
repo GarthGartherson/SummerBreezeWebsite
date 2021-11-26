@@ -34,6 +34,7 @@ module.exports.productSchema = Joi.object({
     category: Joi.string().required(),
     description: Joi.string().required().escapeHTML(),
   }).required(),
+  colors: Joi.object(),
   deleteImages: Joi.array(),
 });
 

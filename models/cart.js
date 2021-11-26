@@ -3,10 +3,15 @@ module.exports = function Cart(oldCart = {}) {
   this.totalQuantity = oldCart.totalQuantity ?? 0;
   this.totalPrice = oldCart.totalPrice ?? 0;
 
-  this.addItem = function (item, id) {
+  this.addItem = function (item, id, color = "Default") {
     let storedItem = this.items[id];
     if (!storedItem) {
-      storedItem = this.items[id] = { item: item, quantity: 0, price: 0 };
+      storedItem = this.items[id] = {
+        item: item,
+        quantity: 0,
+        price: 0,
+        color,
+      };
     }
     storedItem.quantity++;
     storedItem.price = storedItem.item.price * storedItem.quantity;

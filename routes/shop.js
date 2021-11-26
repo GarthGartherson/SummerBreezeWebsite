@@ -14,7 +14,7 @@ router.get("/add-to-cart-direct/:id", catchAsync(shop.addToCartDirect));
 
 router.get("/remove-from-cart/:id", catchAsync(shop.removeFromCart));
 
-router.get("/add-to-cart/:id", catchAsync(shop.addToCart));
+router.post("/add-to-cart/:id", catchAsync(shop.addToCart));
 
 router.get("/shipping", isLoggedIn, shop.renderShipping);
 

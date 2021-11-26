@@ -17,12 +17,13 @@ module.exports.renderShoppingCart = async function (req, res, next) {
 };
 
 module.exports.addToCart = async function (req, res, next) {
+  const { color } = req.body;
   const productId = req.params.id;
   const cart = new Cart(req.session.cart);
   const foundProduct = await Product.findById(productId);
 
   if (foundProduct) {
-    cart.addItem(foundProduct, foundProduct.id);
+    cart.addItem(foundProduct, foundProduct.id, color);
     req.session.cart = cart;
     res.redirect("/");
   }

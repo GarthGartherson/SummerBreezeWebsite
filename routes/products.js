@@ -29,7 +29,12 @@ router.get("/shirts", products.renderShirts);
 router.get("/bracelets", products.renderBracelets);
 router.get("/necklaces", products.renderNecklaces);
 
-router.get("/new", isLoggedIn, checkRole("admin"), products.renderNewForm);
+router.get(
+  "/new",
+  isLoggedIn,
+  checkRole("admin"),
+  catchAsync(products.renderNewForm)
+);
 
 router
   .route("/:id")

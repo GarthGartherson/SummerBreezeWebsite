@@ -33,18 +33,30 @@ module.exports.renderNecklaces = async (req, res) => {
   res.render("products/index", { products, productCategory });
 };
 
-module.exports.renderNewForm = (req, res) => {
-  res.render("products/new");
+module.exports.renderNewForm = async (req, res) => {
+  let optionsArray = ["Bracelet", "Anklet", "Necklace", "Shirt", "Earring"];
+  console.log(optionsArray);
+  res.render("products/new", { optionsArray });
 };
 
 module.exports.createProduct = async (req, res) => {
   // req.body here will be products : { bunch of stuff}
   // if(!req.body.product) throw new ExpressError('Invalid Product Data', 400  )
+  let colorArray = [];
+  const colors = req.body.colors;
+  for (let color in colors) {
+    colorArray.push(color);
+  }
   const product = new Product(req.body.product);
+  product.colors = colorArray;
+  console.log(product);
   product.images = req.files.map((f) => ({
     url: f.path,
     filename: f.filename,
   }));
+  if (!product.images[0].url) {
+    product.images[0].url = "https://unsplash.com/photos/WG7zweuT9aw";
+  }
   product.author = req.user._id;
   await product.save();
   req.flash("success", "Successfully made a new product!");
