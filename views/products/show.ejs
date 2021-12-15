@@ -32,32 +32,42 @@
                   <span>	
                     &#3647; <%= product.price  %> </span>
               </div>
-              <p class="lead"><%= product.description%> </p>
+              <p class="lead leadDescription"><%= product.description%> </p>
               <div class="d-flex align-items-center mt-4">
                       <form 
-                      class="w-100"
+                      class="w-100 needs-validation"
                       action="/shop/add-to-cart/<%=product._id%>"
                       method="POST"
-                      novalidate
                       >
 
                       <div class="row justify-content-around">
                         <div class="col-6">
                           <select id="selectColorList" class=" mt-1 mb-3 form-select col-5" name="color" required>
                             <% if(product.colors.length !== 0){ %> 
+                              <option value="" disabled selected>Choose a Color...</option>
                               <% for(let color of product.colors){ %> 
                                 <option value="<%= color %>"><%= color  %> </option>
                               <% } %> 
                             <% } else { %>
-                                  <option> Default </option>
+                                  <option selected value="Default"> Default </option>
                             <% } %> 
                           </select> 
                         </div>
                         <div class="col-6">
                           <button type="submit" class="btn button_addToCart btn-success me-2 p-2 px-4">Add to Cart</button>
-                          <!-- <button href="/shop/add-to-cart/<%=product._id%>" type="submit" class="btn button_addToCart btn-success me-2 p-2 px-4">Add to Cart</button> -->
                         </div>
                       </div>
+                      <% if(product.category === 'Bracelet' || product.category === 'Anklet') { %> 
+                      <div class="row">
+                        <div class="col-6 col-md-4">
+                          <div class="input-group mb-3">
+                            <input type="text" id="sizeInput" class="form-control text-center" name="size" aria-label="Size (cm)" placeholder="Size (cm)" required>
+                            <span class="input-group-text">cm</span>
+                          </div>
+                          <!-- <input type="number" name="size" id="sizeInput" placeholder="23 cm"> -->
+                        </div>
+                      </div>
+                      <% } %> 
 
                     </form>
                   </div>
@@ -92,7 +102,6 @@
                   <div class="card h-100">
                       <!-- Product image-->
                       <a href="/products/<%=product._id%>">
-                        <% console.log(product.images[0].url) %> 
                         <% if(product.images[0].url){ %> 
                         <img class="card-img-top" src="<%= product.images[0].url %>" alt="Product Image Not Found" />
                         <% } else { %>
@@ -110,7 +119,7 @@
                       </div>
                       <!-- Product actions-->
                       <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/shop/add-to-cart/<%=product._id%>">Add to cart</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/products/<%=product._id%>">View Product</a></div>
                     </div>
                   </div>
               </div>

@@ -17,13 +17,13 @@ module.exports.renderShoppingCart = async function (req, res, next) {
 };
 
 module.exports.addToCart = async function (req, res, next) {
-  const { color } = req.body;
+  const { color, size } = req.body;
   const productId = req.params.id;
   const cart = new Cart(req.session.cart);
   const foundProduct = await Product.findById(productId);
 
   if (foundProduct) {
-    cart.addItem(foundProduct, foundProduct.id, color);
+    cart.addItem(foundProduct, foundProduct.id, color, size);
     req.session.cart = cart;
     res.redirect("/");
   }
@@ -33,7 +33,6 @@ module.exports.addToCartDirect = async function (req, res, next) {
   const productId = req.params.id;
   const cart = new Cart(req.session.cart);
   const foundProduct = await Product.findById(productId);
-  console.log(foundProduct);
   if (foundProduct) {
     cart.addItem(foundProduct, foundProduct.id);
     req.session.cart = cart;
@@ -64,8 +63,6 @@ module.exports.renderShipping = function (req, res, next) {
 
 module.exports.createOrder = async function (req, res, next) {
   const cart = new Cart(req.session.cart);
-
-  console.log(req.body);
 
   const order = new Order({
     user: req.user,
@@ -105,6 +102,7 @@ module.exports.createOrder = async function (req, res, next) {
     totalPrice: order.cart.totalPrice,
     totalQuantity: order.cart.totalQuantity,
   };
+  console.log(arrayCart);
 
   await order.save();
   sendMail(

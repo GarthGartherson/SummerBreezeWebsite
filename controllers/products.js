@@ -35,7 +35,6 @@ module.exports.renderNecklaces = async (req, res) => {
 
 module.exports.renderNewForm = async (req, res) => {
   let optionsArray = ["Bracelet", "Anklet", "Necklace", "Shirt", "Earring"];
-  console.log(optionsArray);
   res.render("products/new", { optionsArray });
 };
 
@@ -49,7 +48,6 @@ module.exports.createProduct = async (req, res) => {
   }
   const product = new Product(req.body.product);
   product.colors = colorArray;
-  console.log(product);
   product.images = req.files.map((f) => ({
     url: f.path,
     filename: f.filename,
@@ -85,7 +83,30 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateProduct = async (req, res) => {
   const { id } = req.params;
+  let colorArray = [];
+  for (let [key, color] of Object.entries(req.body.colors)) {
+    colorArray.push(color);
+  }
   const product = await Product.findByIdAndUpdate(id, { ...req.body.product });
+
+  let result2 = product.colors.filter((color) =>
+    colorArray.every((color2) => !color2.includes(color))
+  );
+  let result3 = colorArray.filter((color) =>
+    product.colors.every((color2) => !color2.includes(color))
+  );
+  if (result2) {
+    // cut these out. they are present in DB but not in posted colors
+    result2.forEach((color) => {
+      let foundIndex = product.colors.indexOf(color);
+      product.colors.splice(foundIndex, 1);
+    });
+  }
+  if (result3) {
+    // add these in they are present in posted colors but not in db
+    result3.forEach((color) => product.colors.push(color));
+  }
+
   const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
   product.images.push(...imgs);
   await product.save();

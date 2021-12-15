@@ -3,7 +3,7 @@ module.exports = function Cart(oldCart = {}) {
   this.totalQuantity = oldCart.totalQuantity ?? 0;
   this.totalPrice = oldCart.totalPrice ?? 0;
 
-  this.addItem = function (item, id, color = "Default") {
+  this.addItem = function (item, id, color = "Default", size = "Default") {
     let storedItem = this.items[id];
     if (!storedItem) {
       storedItem = this.items[id] = {
@@ -11,6 +11,7 @@ module.exports = function Cart(oldCart = {}) {
         quantity: 0,
         price: 0,
         color,
+        size,
       };
     }
     storedItem.quantity++;

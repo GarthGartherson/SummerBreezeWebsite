@@ -4,8 +4,6 @@ const selectColorList = document.querySelector("#selectColorList");
 
 buttonAddColor.addEventListener("click", function (e) {
   e.preventDefault();
-  const lineBreak = document.createElement("br");
-  selectColorList.append(lineBreak);
 
   let newColor = document.createElement("input");
   let chosenColor = document.querySelector("#message-text");
@@ -14,10 +12,10 @@ buttonAddColor.addEventListener("click", function (e) {
   newColor.innerText = `${chosenColor.value}`;
   newColor.value = `${chosenColor.value}`;
   newColor.name = `colors[${chosenColor.value}]`;
-  newColor.classList.add("my-2", "my-md-1");
+  newColor.classList.add("my-2", "my-md-1", "d-block");
+  newColor.setAttribute("readonly", "");
 
   if (chosenColor.name === null || chosenColor.value === "") {
-    selectColorList.lastChild.remove();
     return;
   }
   selectColorList.appendChild(newColor);
@@ -29,8 +27,8 @@ buttonDeleteColor.addEventListener("click", function (e) {
   console.log("delete color");
   let currentColorList = document.querySelector("#selectColorList");
   if (currentColorList.children.length > 1) {
-    for (i = 0; i < 2; i++) {
-      currentColorList.removeChild(currentColorList.lastChild);
+    for (i = 0; i < 1; i++) {
+      currentColorList.removeChild(currentColorList.lastElementChild);
     }
   }
 });

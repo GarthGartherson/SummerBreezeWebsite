@@ -41,20 +41,15 @@ router
   .get(catchAsync(products.showProduct))
   .put(
     isLoggedIn,
-    isAuthor,
+    checkRole("admin"),
     upload.array("image"),
     validateProduct,
     catchAsync(products.updateProduct)
   )
-  .delete(
-    isLoggedIn,
-    isAuthor,
-    checkRole("admin"),
-    catchAsync(products.deleteProduct)
-  );
+  .delete(isLoggedIn, checkRole("admin"), catchAsync(products.deleteProduct));
 
 //prettier-ignore
-router.get("/:id/edit",isLoggedIn,isAuthor,catchAsync(products.renderEditForm)
+router.get("/:id/edit",isLoggedIn,checkRole("admin"),catchAsync(products.renderEditForm)
 );
 
 module.exports = router;

@@ -34,10 +34,11 @@
                             <ol class="list-group list-group-numbered">
                                 <% for(let product of order.items) { %> 
                                 <li class="list-group-item bg-white d-flex justify-content-between align-items-start">
-                                  <div class="ms-2 me-auto">
+                                  <div class="ms-2 me-auto text-start">
                                     <div class="fw-bold"><%= product.item.title %> </div>
-                                    <div class="">Color: <%= product.color %> </div>
-                                    <span><%= product.item.price %> x <%= product.quantity %> </span>
+                                    <div class="my-1">Color: <%= product.color %> </div>
+                                    <div class="my-1">Size: <%= product.size %> </div>
+                                    <span class="ms-1">&#3647; <%= product.item.price %> x <%= product.quantity %> </span>
                                   </div>
                                   <span class="badge bg-primary rounded-pill">&#3647; <%= product.item.price %></span>
                                 </li>

@@ -23,9 +23,9 @@
                     <h5 class="card-title"><%= product.title %></h5>
                     <p class="card-text"><%= product.description %></p>
                 </div>
-                <div class="card-footer bg-white">
-                    <p class="card-text col-sm-5 mx-2 d-inline-block d-4">&#3647; <%= product.price %> </p>
-                    <a href="/shop/add-to-cart/<%=product._id%>" class="btn btn-success col-sm-5 mx-2">Buy</a>
+                <div class="card-footer bg-white d-flex justify-content-around align-items-center">
+                    <p class="card-text col-6 col-md-5 ps-4 ps-sm-2 ps-md-3 m-0">&#3647; <%= product.price %> </p>
+                    <a href="/products/<%=product._id%>" class="btn btn-success col-6 col-md-7 mx-2">View Product</a>
                 </div>
               </div>
             </div>
