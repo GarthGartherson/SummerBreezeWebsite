@@ -30,7 +30,7 @@ const sendMail = (email, subject, arrayCart, emailObject) => {
   });
 
   const mailOptions = {
-    from: mail.summerbreezebkk.com,
+    from: process.env.HOST_EMAIL,
     to: [process.env.TARGET_EMAIL, email],
     // to: process.env.TARGET_EMAIL,
     subject,
