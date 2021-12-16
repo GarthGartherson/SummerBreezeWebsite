@@ -102,12 +102,11 @@ module.exports.createOrder = async function (req, res, next) {
     totalPrice: order.cart.totalPrice,
     totalQuantity: order.cart.totalQuantity,
   };
-  console.log(arrayCart);
-
+  sss;
   await order.save();
   sendMail(
     email,
-    `Order Confirmation for ${order.instagram}`,
+    `Order Confirmation for ${order.firstName}`,
     arrayCart,
     emailObject
   );
