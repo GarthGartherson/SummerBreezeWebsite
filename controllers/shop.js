@@ -102,7 +102,7 @@ module.exports.createOrder = async function (req, res, next) {
     totalPrice: order.cart.totalPrice,
     totalQuantity: order.cart.totalQuantity,
   };
-  sss;
+
   await order.save();
   sendMail(
     email,
