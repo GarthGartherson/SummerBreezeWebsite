@@ -6,8 +6,7 @@ const ejs = require("ejs");
 
 const auth = {
   auth: {
-    // api_key: process.env.MAILGUN_API,
-    api_key: process.env.SUMMER_API_KEY,
+    api_key: process.env.MAILGUN_API,
     domain: process.env.DOMAIN_KEY,
   },
 };
@@ -33,7 +32,7 @@ const sendMail = (email, subject, arrayCart, emailObject) => {
   const mailOptions = {
     from: email,
     to: [process.env.TARGET_EMAIL, email],
-    // to: ["summerbreeze.thai@gmail.com", email],
+    // to: process.env.TARGET_EMAIL,
     subject,
     html: htmlToSend,
   };
