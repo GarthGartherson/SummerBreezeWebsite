@@ -2,6 +2,10 @@ html {
   min-height: 100vh;
 }
 
+.flashMessage {
+  z-index: 100;
+}
+
 body {
   padding: 0;
   margin: 0;
