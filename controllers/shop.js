@@ -106,7 +106,7 @@ module.exports.createOrder = async function (req, res, next) {
   await order.save();
   sendMail(
     email,
-    `Order Confirmation for ${order.firstName}`,
+    `Order Confirmation for ${emailObject.firstName}`,
     arrayCart,
     emailObject
   );
