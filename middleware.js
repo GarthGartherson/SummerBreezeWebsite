@@ -51,3 +51,11 @@ module.exports.checkRole = function checkAdmin(role) {
     next();
   };
 };
+
+module.exports.checkCart = function checkCart(cart) {
+  if (cart.items.length === 0) {
+    req.flash("error", "No items in Cart");
+    res.redirect("/");
+  }
+  next();
+};
