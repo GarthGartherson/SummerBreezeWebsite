@@ -1,10 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {
-  isLoggedIn,
-  validateShipping,
-  checkCartLength,
-} = require("../middleware");
+const { isLoggedIn, validateShipping } = require("../middleware");
 const catchAsync = require("../utils/catchAsync");
 const shop = require("../controllers/shop");
 
@@ -20,12 +16,7 @@ router.get("/remove-from-cart/:id", catchAsync(shop.removeFromCart));
 
 router.post("/add-to-cart/:id", catchAsync(shop.addToCart));
 
-router.get(
-  "/shipping",
-  isLoggedIn,
-  checkCartLength,
-  catchAsync(shop.renderShipping)
-);
+router.get("/shipping", isLoggedIn, catchAsync(shop.renderShipping));
 
 router.post(
   "/shipping",

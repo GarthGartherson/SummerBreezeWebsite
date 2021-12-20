@@ -40,10 +40,6 @@ module.exports = function Cart(oldCart = {}) {
     for (const id in this.items) {
       arr.push(this.items[id]);
     }
-    // console.log(arr[3].item.title);
-    for (let instance of arr) {
-      console.log(instance.item.title);
-    }
     return arr;
   };
 };

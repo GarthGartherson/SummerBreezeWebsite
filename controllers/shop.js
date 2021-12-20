@@ -55,7 +55,7 @@ module.exports.removeFromCart = async function (req, res, next) {
 module.exports.renderShipping = function (req, res, next) {
   if (!req.session.cart) {
     req.flash("error", "Your shopping Cart is empty");
-    res.redirect("shop/shoppingCart");
+    res.redirect("/shop/shoppingCart");
   }
   const cart = new Cart(req.session.cart);
   res.render("shop/shipping", { total: cart.totalPrice });
